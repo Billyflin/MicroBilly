@@ -1,0 +1,31 @@
+eureka:
+  client:
+    register-with-eureka: false
+
+server:
+  port: 8080
+
+jwt:
+  secret: ecf1222c-88fd-47f3-988f-bdd78bade1ad
+
+spring:
+#  data:
+#    redis:
+#      host: localhost
+#      port: 6379
+  application:
+    name: msvc-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: users
+          uri: http://localhost:8090
+          predicates:
+            - Path=/user/**
+        - id: cotizacion
+          uri: http://localhost:8091
+          predicates:
+            - Path=/api/cotizacion/**
